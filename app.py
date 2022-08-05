@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from cloudipsp import Api, Checkout
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
@@ -12,6 +13,9 @@ class Item(db.Model):
     title = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     isActive = db.Column(db.Boolean, default=True)
+
+    def __repr__(self):
+        return self.title
 
 
 @app.route('/')
